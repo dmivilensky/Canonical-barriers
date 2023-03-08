@@ -1,4 +1,7 @@
 function [v_prime, t_end, error] = fit_asymptotics_near_infty_decimal(t0, v, t_end, h)
+    addpath(genpath('../asymptotic'));
+    addpath(genpath('../integration'));
+
     %{
     Description:
       Find initial value of v'(t_0) at the point t_0 for Painleve transcendent

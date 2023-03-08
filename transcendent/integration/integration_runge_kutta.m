@@ -1,4 +1,6 @@
 function [t, v, v_prime] = integration_runge_kutta(t_begin, t0, t_end, h, v0, v0_prime)
+    addpath(genpath('../painleve'));
+    
     %{
     Description:
       Explicit midpoint Runge--Kutta second-order method applied to the system of ODE's dv/dt = w, dw/ds = F(t,

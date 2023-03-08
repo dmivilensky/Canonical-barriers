@@ -1,4 +1,6 @@
-function [s, u, u_prime] = integration_runge_kutta_substitution(s0, s_end, t_end, h, u0, u0_prime)
+function [s, u, u_prime] = integration_runge_kutta_substitution(s0, s_end, t_end, h, h_infty, u0, u0_prime)
+    addpath(genpath('../painleve'));
+    
     %{
     Description:
       Kutta third-order method applied to the system of ODE's du/ds = w, dw/ds = F(s,
@@ -41,7 +43,7 @@ function [s, u, u_prime] = integration_runge_kutta_substitution(s0, s_end, t_end
         n = n + 1;
     end
 
-    t = flip((1/s0):h:t_end, 2);
+    t = flip((1/s0):h_infty:t_end, 2);
     n = size(t, 2);
 
     u = cat(2, zeros(1, n-1), u);
@@ -49,12 +51,12 @@ function [s, u, u_prime] = integration_runge_kutta_substitution(s0, s_end, t_end
 
     while n > 1
         v_prime = -1/(t(n)^2) * u_prime(n);
-        j1 = h * painleve(t(n), u(n), v_prime);
-        k1 = h * v_prime;
-        j2 = h * painleve(t(n) + h/2, u(n) + k1/2, v_prime + j1/2);
-        k2 = h * (v_prime + j1/2);
-        j3 = h * painleve(t(n) + h, u(n) + 2*k2 - k1, v_prime + 2*j2 - j1);
-        k3 = h * (v_prime + 2*j2 - j1);
+        j1 = h_infty * painleve(t(n), u(n), v_prime);
+        k1 = h_infty * v_prime;
+        j2 = h_infty * painleve(t(n) + h_infty/2, u(n) + k1/2, v_prime + j1/2);
+        k2 = h_infty * (v_prime + j1/2);
+        j3 = h_infty * painleve(t(n) + h_infty, u(n) + 2*k2 - k1, v_prime + 2*j2 - j1);
+        k3 = h_infty * (v_prime + 2*j2 - j1);
         u_prime(n-1) = -(t(n-1)^2) * (v_prime + (j1 + 4*j2 + j3)/6);
         u(n-1) = u(n) + (k1 + 4*k2 + k3)/6;
         n = n - 1;

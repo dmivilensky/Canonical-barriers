@@ -1,4 +1,7 @@
 function [v_prime, t_begin, error] = fit_asymptotics_near_zero_binsearch(t0, v0, v_prime_lower, v_prime_upper, t_begin, h)
+    addpath(genpath('../asymptotic'));
+    addpath(genpath('../integration'));
+
     %{
     Description:
       Find initial value of v'(t_0) at the point t_0 for Painleve transcendent 

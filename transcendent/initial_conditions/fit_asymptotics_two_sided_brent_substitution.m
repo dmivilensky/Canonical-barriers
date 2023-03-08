@@ -1,4 +1,4 @@
-function [v, v_prime, t_begin, t_end, error_left, error_right] = fit_asymptotics_two_sided_brent(t0, v0, v0_prime, t_begin, t_end, h)
+function [v, v_prime, t_begin, t_end, error_left, error_right] = fit_asymptotics_two_sided_brent_substitution(t0, v0, v0_prime, t_begin, t_end, h)
     %{
     Description:
       Find initial values at the point t_0 for Painleve transcendent providing

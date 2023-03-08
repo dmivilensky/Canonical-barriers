@@ -1,3 +1,7 @@
+addpath(genpath('asymptotic'));
+addpath(genpath('initial_conditions'));
+addpath(genpath('integration'));
+
 % Set integration step size common for all the algorithms
 h = 0.05;
 
@@ -107,6 +111,8 @@ hold on
     % Construct Newton polynomial on these reference points and evalute its
     % values on a segment
     interpolant = Newtoninterp(t_to_interpolate, v_to_interpolate, t(index_begin+margin:index_end-margin));
+
+    save calculated/transcendent/bounds_and_interpolant_pade.mat t_begin t_end t_to_interpolate v_to_interpolate interpolant;
 
     plot(t(index_begin+margin:index_end-margin), interpolant, 'LineWidth', 1.5);
     labels = [labels, {sprintf('Newton polynomial N(t) for step = %0.2e (%d points)', interpolation_step, size(t_to_interpolate, 2))}];

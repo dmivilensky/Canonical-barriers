@@ -1,4 +1,6 @@
 function [v, v_prime, t_begin, t_end, error_left, error_right] = fit_asymptotics_two_sided_gridsearch(t0, v0, v0_prime, t_begin, t_end, use_confidence_segment)
+    addpath(genpath('../asymptotic'));
+
     %{
     Description:
       Find initial values at the point t_0 for Painleve transcendent providing

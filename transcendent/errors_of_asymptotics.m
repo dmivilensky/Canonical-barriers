@@ -1,3 +1,6 @@
+addpath(genpath('asymptotic'));
+addpath(genpath('painleve'));
+
 % Set integration step size common for all the algorithms
 h = 0.05;
 

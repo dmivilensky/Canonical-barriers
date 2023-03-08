@@ -1,4 +1,7 @@
 function [t, v, v_prime] = integration_taylor(steps_to_zero, t0, steps_to_infty, step, max_error, max_h, max_degree, max_degree_eval, v0, v0_prime, use_pade)
+    addpath(genpath('../expansion'));
+    addpath(genpath('../painleve'));
+    
     %{
     Description:
       Taylor integration method applied to the system of ODE's dv/dt = w, dw/ds = F(t,
