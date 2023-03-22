@@ -118,20 +118,22 @@ function [t, v, v_prime] = integration_taylor(steps_to_zero, t0, steps_to_infty,
                 break;
             end
             h = (1 - 1e-16) * R;
+%             h = R / 10;
             discrepancy = 1;
             while discrepancy > max_error && h > 1e-16
+                h = h / 2;
                 if use_pade
                     [a, b] = taylor_to_pade(coefs, L, M);
                     [v_approx, v_prime_approx, v_prime_prime_approx] = pade_evaluate(a, b, h);
                 else
                     [v_approx, v_prime_approx, v_prime_prime_approx] = taylor_evaluate(coefs, h);
                 end
-                discrepancy = painleve_discrepancy(t_s(n) + h, v_approx, v_prime_approx, v_prime_prime_approx);
-                h = h / 2;
+                discrepancy = painleve_substitution_discrepancy(t_s(n) + h, v_approx, v_prime_approx, v_prime_prime_approx);
+                disp(discrepancy);
             end
             h = min(h, max_h);
             if h <= 1e-16
-                fprintf('Warning: painleve substitution integration method made only %i of %i steps', n, steps_to_zero);
+                fprintf('Warning: painleve substitution integration method made only %i of %i steps (due to too small h)', n, steps_to_zero);
                 break;
             end
         end

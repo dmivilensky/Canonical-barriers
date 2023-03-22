@@ -41,7 +41,7 @@ hold on
     % using Padé method
     max_degree = 100;
     max_h = 1;
-    [t, v, ~] = integration_taylor(2 * ceil((1/t_begin - 1/t0) / max_h), t0, 2 * ceil((t_end - t0) / max_h), 0.1, nan, max_h, max_degree, max_degree, inits(1,1), inits(1,2), true);
+    [t, v, ~] = integration_taylor(2 * ceil((1/t_begin - 1/t0) / max_h), t0, 2 * ceil((t_end - t0) / max_h), 0.1, nan, max_h, max_degree, max_degree, inits(1,1), inits(1,2), false);
 
     plot(t, v, ':', 'LineWidth', 1.5);
     labels = [labels, {sprintf('v(t), t₀ = %0.2e, v(t₀) = %0.2e, v`(t₀) = %0.2e', t0, inits(1,1), inits(1,2))}];
@@ -112,7 +112,8 @@ hold on
     % values on a segment
     interpolant = Newtoninterp(t_to_interpolate, v_to_interpolate, t(index_begin+margin:index_end-margin));
 
-    save calculated/transcendent/bounds_and_interpolant_pade.mat t_begin t_end t_to_interpolate v_to_interpolate interpolant;
+%     save calculated/transcendent/bounds_and_interpolant_pade.mat t_begin t_end t_to_interpolate v_to_interpolate interpolant;
+    save calculated/transcendent/bounds_and_interpolant_taylor.mat t_begin t_end t_to_interpolate v_to_interpolate interpolant;
 
     plot(t(index_begin+margin:index_end-margin), interpolant, 'LineWidth', 1.5);
     labels = [labels, {sprintf('Newton polynomial N(t) for step = %0.2e (%d points)', interpolation_step, size(t_to_interpolate, 2))}];
