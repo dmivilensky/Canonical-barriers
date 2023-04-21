@@ -3,7 +3,7 @@ function [coefs] = taylor_painleve_substitution(s_0, u_0, u_1, max_degree, facto
     Description:
       Coefficients in a Taylor series of the solution to Painleve III D7
       equation, after substitution s = 1/t, at time s_0 with initial point 
-      u(s_0) = u_0, du/ds(s_0) = u_1 (= -t0^2 * u'(t_0)). 
+      u(s_0) = u_0, du/ds(s_0) = u_1 (= -t0^2 * v'(t_0)). 
       One can test a procedure with s_0 = 1, u_0 = 1, u_1 = -1/3, the result
       will correspond to Taylor expansion of u = s^(-1/3) at s = 1.
 
